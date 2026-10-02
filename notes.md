@@ -4,8 +4,10 @@ As part of Wave 0, please fill out notes for each of the below files. They are i
 PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
-
+File decides what files to print, and if colored output should be used. The file also has the root directory that begins the printing of the tree.
+file uses flags to control if output is colored, and if hidden files should be shown. output is colored by default
 ## ConsoleColor.java
+
 
 ## ColorPrinter.java / ColorPrinterTest.java
 
