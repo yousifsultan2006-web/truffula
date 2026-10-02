@@ -12,9 +12,12 @@ the path is mandatory as it is the direct or relative path to the direcotry in w
 order of flags is irrelevant, path must be the last argument
 
 ## ConsoleColor.java
-
+enum is a special type declaration. it defines the available console text colors that can be used. Each enum value represents a specific color using ANSI escape code. ANSI escape code is code that controls what color console text is printed with.
+the ConsoleColor file uses this enum in creating a code final string value named code, which is used to construct a ConsoleColor. 
+the file also includes a getCode method that gets the ANSI code associated with the color
 
 ## ColorPrinter.java / ColorPrinterTest.java
+
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
