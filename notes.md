@@ -30,7 +30,15 @@ it then creates a ColorPrinter that prints into printStream, it sets the Current
 
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
-
+This file goes through the configuration options found in app.java. How printing with color is defined, if hidden file should be printed, and what directory to print. It gives the same usage examples as the ones shown in app.java. 
+The file contains a few methods. first being getRoot which returns the directory chosen to be printed. 
+the second method is a isShowHidden method which indicates if hidden file should be shown or not.
+Third is isUseColor which indicates if color should be used when printing the directory. if false then all text is printed in white. 
+TruffulaOptions constructor that constructs a TruffulaOptions object based on command line arguments (-nc, -h). 
+a second TruffulaOptions constructor that also constructs a TruffulaOptions objects but uses explicit values instead. 
+the test file includes a test that begins by creating a file named directory, using the mkdir method on it to make it a directory. creating a string and setting it as the absolutepath for the created directory using the getAbsolutePath method.
+creating a string of arguments named args which has command line commands and the created direcotry. it creates a truffulaOptions object named options. the test is checking if a valid Directory Is Set, hence the name testValidDirecotryIsSet. it then uses an assertEquals to check if the directory absolute path equals options.getRoot.getAbsolutePath. and assertTrue for isShowHidden, and assertFalse for isUseColor, both for the options object
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
+
 
 ## AlphabeticalFileSorter.java
