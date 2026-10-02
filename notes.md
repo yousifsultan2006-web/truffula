@@ -24,6 +24,10 @@ The file includes the setCurrentColor method that sets the current printing colo
 print is a method that prints a new message without appending a new line. it also has 2 method creations, with the same reset and optional reset as println. 
 there are 2 constructors that create ColorPrinters. one which only takes one paramter which is the printStream, if this is called, the defualt color is white. The other ColorPrinter takes a printStream and an initial ConsoleColor
 
+ColorPrinterTest includes a test that tests out println with color red and reset. 
+it first creates a ByteArrayOutputStream named outputStream, which acts as a in memroy storage for anything written into it. so everything written into it is saved in memory. it then creates a printStream that uses outputStream. printStream is a nicer interface that gives you access to convenient methods like print(), println(), and printf(). this output is setn to outputStream.
+it then creates a ColorPrinter that prints into printStream, it sets the CurrentColor to red with setCurrentColor, creates a String messge, uses println on ColorPrinter with the color red, and creates a expectedOutput string and then asserts if its equal
+
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
