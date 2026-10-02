@@ -20,6 +20,9 @@ the file also includes a getCode method that gets the ANSI code associated with 
 This class is a utility class for printing  colored text into printStream with the ANSI escape codes in ConsoleColor
 ColorPrinter sets the text to a specific color, and prints that text in that color to the specified printStream. the color can be reset after each print or kept depending on the parameters. 
 Usage example would have you constructing a ColorPrinter, setting it to a specific printStream, using the setCurrentColor method to set it to a color from the ConsoleColor enum, and then printing it using the println method on the constructed ColorPrinter. 
+The file includes the setCurrentColor method that sets the current printing color, getCurrentColor method which returns the current printing color, and println which prints a new message in a new line. the color is set to default when this method is called. another println method is defined, this one gives you the option to reset the color if you set the parameter to false. the initial println method also take a parameter of true or false for the reset, but does not mention it being optional. 
+print is a method that prints a new message without appending a new line. it also has 2 method creations, with the same reset and optional reset as println. 
+there are 2 constructors that create ColorPrinters. one which only takes one paramter which is the printStream, if this is called, the defualt color is white. The other ColorPrinter takes a printStream and an initial ConsoleColor
 
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
