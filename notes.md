@@ -17,6 +17,8 @@ the ConsoleColor file uses this enum in creating a code final string value named
 the file also includes a getCode method that gets the ANSI code associated with the color
 
 ## ColorPrinter.java / ColorPrinterTest.java
+This class is a utility class for printing  colored text into printStream with the ANSI escape codes in ConsoleColor
+ColorPrinter sets the text to a specific color, and prints that text in that color to the specified printStream. the color can be reset after each print or kept depending on the parameters. 
 
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
