@@ -8,7 +8,8 @@ File decides what files to print, and if colored output should be used. The file
 file uses flags to control if output is colored, and if hidden files should be shown. output is colored by default
 the path is mandatory as it is the direct or relative path to the direcotry in which the data that will be printed is located. 
 -h is the flag that sets show hidden files to false 
--nc turns off color 
+-nc turns off color. 
+order of flags is irrelevant, path must be the last argument
 
 ## ConsoleColor.java
 
