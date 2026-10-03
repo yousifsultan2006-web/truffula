@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.util.List;
+import java.io.File;
 
 /**
  * TruffulaPrinter is responsible for printing a directory tree structure
@@ -75,11 +76,13 @@ public class TruffulaPrinter {
     out = new ColorPrinter(outStream);
   }
 
+
+  
   /**
    * WAVE 4: Prints a tree representing the directory structure, with directories and files
    * sorted in a case-insensitive manner. The tree is displayed with 3 spaces of
    * indentation for each directory level.
-   * 
+   *
    * WAVE 5: If hidden files are not to be shown, then no hidden files/folders will be shown.
    *
    * WAVE 6: If color is enabled, the output cycles through colors at each directory level
@@ -105,6 +108,36 @@ public class TruffulaPrinter {
   public void printTree() {
     // TODO: Implement this!
     // REQUIRED: ONLY use java.io, DO NOT use java.nio
+    File root = options.getRoot();
+    String rootName = root.getName();
+    
+    out.println(rootName);
+    
+    
+    helperMethod(root, 1);
+    }
+
+    private void helperMethod(File directory, int depth) {
+      String indentation = "";
+      File[] files = directory.listFiles();
+
+      for (File file : files) {
+        for (int i = 0; i < depth; i++) {
+          indentation += " ";
+        }
+        out.println(indentation + file.getName());
+        for (int i = 0; i < depth; i++) {
+          indentation += " ";
+        }
+
+        if (file.isDirectory()) {
+          helperMethod(file, depth + 1);
+        }
+      }
+
+    }
+
+
     
     // Hints:
     // - Add a recursive helper method
