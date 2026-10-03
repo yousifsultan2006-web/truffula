@@ -128,7 +128,7 @@ public class TruffulaOptions  {
     File directory = new File(directoryPath);
 
     if (!directory.exists() || !directory.isDirectory()) {
-      throw new IllegalArgumentException();
+      throw new FileNotFoundException();
     }
       this.root = directory;
       this.useColor = useColor;
