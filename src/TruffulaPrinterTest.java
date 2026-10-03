@@ -84,6 +84,57 @@ public class TruffulaPrinterTest {
     }
 
     @Test
+    public void testPrintTreeMultipleFiles(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+
+        
+        new File(root, "a.txt").createNewFile();
+        new File(root, "b.txt").createNewFile();
+        
+        TruffulaOptions options = new TruffulaOptions(root, true, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("  a.txt"));
+        assertTrue(output.contains("  b.txt"));
+        
+
+        
+    }
+
+     @Test
+    public void testPrintTreeEmptyDirectory(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+
+        
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, true, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+       
+
+        assertTrue(outputStream.toString().contains("root/"));
+        
+        
+
+        
+    }
+
+    @Test
     public void testPrintTree_ExactOutput_WithCustomPrintStream(@TempDir File tempDir) throws IOException {
         // Build the example directory structure:
         // myFolder/
