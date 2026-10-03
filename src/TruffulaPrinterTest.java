@@ -66,7 +66,7 @@ public class TruffulaPrinterTest {
 
         File sub = new File(root, "sub");
         sub.mkdir();
-        new File(sub, "file.txt)").createNewFile();
+        new File(sub, "file.txt").createNewFile();
         TruffulaOptions options = new TruffulaOptions(root, true, false);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
