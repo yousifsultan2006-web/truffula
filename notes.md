@@ -51,3 +51,8 @@ creating a string of arguments named args which has command line commands and th
 
 
 ## AlphabeticalFileSorter.java
+- This is a utility class used to sort an array of files alphabetically by name. 
+- the sorting ignores capitalization, so uppercase and lowercase letters are treated the same. 
+- it uses a static sort method that takes a array of files and returns a sorted array.
+- it uses the Arrays.sort method and lambda expression to compare the names of two files using compareToIgnoreCase.
+- the file tells us that we do not need to modify this class.
