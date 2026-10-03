@@ -110,23 +110,24 @@ public class TruffulaOptions  {
     if (args.length == 0) {
       throw new IllegalArgumentException();
     }
-    if (args.length - 1 != )
+    
     for (int i = 0; i < args.length - 1; i++) {
       String arg = args[i];
 
       if(arg.equals("-nc")) {
         useColor = false;
-      }
-      if (arg.equals("-h")) {
+      } else if (arg.equals("-h")) {
         showHidden = false;
+      } else {
+        throw new IllegalArgumentException();
       }
       
     }
     
     String directoryPath = args[args.length-1];
     File directory = new File(directoryPath);
-    
-    if (!direcotry.exists() || !directory.isDirectory()) {
+
+    if (!directory.exists() || !directory.isDirectory()) {
       throw new IllegalArgumentException();
     }
       this.root = directory;
