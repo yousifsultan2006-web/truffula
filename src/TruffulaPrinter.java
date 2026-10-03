@@ -111,31 +111,34 @@ public class TruffulaPrinter {
     File root = options.getRoot();
     String rootName = root.getName();
     
-    out.println(rootName);
+    out.println(rootName + "/");
     
     
     helperMethod(root, 1);
     }
 
     private void helperMethod(File directory, int depth) {
-      String indentation = "";
       File[] files = directory.listFiles();
 
       for (File file : files) {
+        String indentation = "";
+
         for (int i = 0; i < depth; i++) {
-          indentation += " ";
+          indentation += "   ";
         }
-        out.println(indentation + file.getName());
-        for (int i = 0; i < depth; i++) {
-          indentation += " ";
-        }
+        
 
         if (file.isDirectory()) {
+          out.println(indentation + file.getName() + "/");
           helperMethod(file, depth + 1);
+        } 
+        else {
+          out.println(indentation + file.getName());
         }
       }
 
     }
+
 
 
     

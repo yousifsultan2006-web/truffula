@@ -59,6 +59,27 @@ public class TruffulaPrinterTest {
         }
         return hidden;
     }
+    @Test
+    public void testPrintTree(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        File sub = new File(root, "sub");
+        sub.mkdir();
+        new File(sub, "file.txt)").createNewFile();
+        TruffulaOptions options = TruffulaOptions(root, true, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains)
+
+        
+    }
 
     @Test
     public void testPrintTree_ExactOutput_WithCustomPrintStream(@TempDir File tempDir) throws IOException {
