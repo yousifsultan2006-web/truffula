@@ -39,6 +39,15 @@ a second TruffulaOptions constructor that also constructs a TruffulaOptions obje
 the test file includes a test that begins by creating a file named directory, using the mkdir method on it to make it a directory. creating a string and setting it as the absolutepath for the created directory using the getAbsolutePath method.
 creating a string of arguments named args which has command line commands and the created direcotry. it creates a truffulaOptions object named options. the test is checking if a valid Directory Is Set, hence the name testValidDirecotryIsSet. it then uses an assertEquals to check if the directory absolute path equals options.getRoot.getAbsolutePath. and assertTrue for isShowHidden, and assertFalse for isUseColor, both for the options object
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
+- This file creates a hidden file. 
+- it then tests 'printTree' with an exact expected output and a custom 'PrintStream'. 
+- it is responsible for printing the directory tree structure. 
+- it supports case-insensetive sorting and cycling through colors. 
+- it has a default color sequence if no custom colors are prvoided
+- it uses overloaded constructors depending on whether an output stream or color sequence is provided.
+- TruffulaPrinterTest creates folders and files, including hidden files and subdirectories, then tests if printTree gives the expected output.
+
+
 
 
 ## AlphabeticalFileSorter.java
