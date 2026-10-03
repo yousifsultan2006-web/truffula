@@ -102,8 +102,8 @@ public class TruffulaPrinterTest {
 
         String output = outputStream.toString();
 
-        assertTrue(output.contains("  a.txt"));
-        assertTrue(output.contains("  b.txt"));
+        assertTrue(output.contains("   a.txt"));
+        assertTrue(output.contains("   b.txt"));
         
 
         
