@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -102,5 +103,34 @@ public class TruffulaOptionsTest {
   assertTrue(options.isUseColor());
   assertFalse(options.isShowHidden());
  }
+
+
+ @Test void testOnlyHiddenFlag(@TempDir File tempDir) throws FileNotFoundException {
+  String[] args = {"-h", tempDir.getAbsolutePath()};
+  TruffulaOptions options = new TruffulaOptions(args);
+
+  assertTrue(options.isShowHidden());
+  assertTrue(options.isUseColor());
+ }
+
+ @Test void testOnlyNoColorFlag(@TempDir File tempDir) throws FileNotFoundException {
+  String[] args = {"-nc", tempDir.getAbsolutePath()};
+  TruffulaOptions options = new TruffulaOptions(args);
+
+  assertFalse(options.isShowHidden());
+  assertFalse(options.isUseColor());
+ }
+
+ @Test void testFileInsteadOfDirectory(@TempDir File tempDir) throws IOException {
+  File file = new File(tempDir, "file.txt");
+  file.createNewFile();
+
+  String[] args = {file.getAbsolutePath()};
+
+  assertThrows(IOException.class, () -> {
+    new TruffulaOptions(args);
+  });
+ }
+
 
 }
