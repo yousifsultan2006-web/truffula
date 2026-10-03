@@ -117,7 +117,7 @@ public class TruffulaOptions  {
       if(arg.equals("-nc")) {
         useColor = false;
       } else if (arg.equals("-h")) {
-        showHidden = false;
+        showHidden = true;
       } else {
         throw new IllegalArgumentException();
       }
