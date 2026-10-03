@@ -67,7 +67,7 @@ public class TruffulaPrinterTest {
         File sub = new File(root, "sub");
         sub.mkdir();
         new File(sub, "file.txt)").createNewFile();
-        TruffulaOptions options = TruffulaOptions(root, true, false);
+        TruffulaOptions options = new TruffulaOptions(root, true, false);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
@@ -76,7 +76,9 @@ public class TruffulaPrinterTest {
 
         String output = outputStream.toString();
 
-        assertTrue(output.contains)
+        assertTrue(output.contains("root/"));
+        assertTrue(output.contains("   sub/"));
+        assertTrue(output.contains("      file.txt"));
 
         
     }
