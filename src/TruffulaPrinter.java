@@ -110,6 +110,9 @@ public class TruffulaPrinter {
     // REQUIRED: ONLY use java.io, DO NOT use java.nio
     File root = options.getRoot();
     String rootName = root.getName();
+    if(options.isUseColor()) {
+      out.setCurrentColor(ConsoleColor.WHITE);
+    }
     
     out.println(rootName + "/");
     
@@ -130,7 +133,18 @@ public class TruffulaPrinter {
         if (!options.isShowHidden() && file.isHidden()) {
           continue;
         }
-        
+        if (options.isUseColor()) {
+          
+          if(depth % 3 == 0) {
+          out.setCurrentColor(ConsoleColor.WHITE);
+           } else if (depth % 3 == 2) {
+          out.setCurrentColor(ConsoleColor.YELLOW);
+
+           } else if (depth % 3 == 1) {
+          out.setCurrentColor(ConsoleColor.PURPLE);
+           }
+          }
+
         if (file.isDirectory()) {
           out.println(indentation + file.getName() + "/");
           helperMethod(file, depth + 1);
@@ -138,6 +152,10 @@ public class TruffulaPrinter {
         else {
           out.println(indentation + file.getName());
         }
+      
+        
+
+        
       }
 
     }
