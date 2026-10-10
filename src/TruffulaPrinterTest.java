@@ -384,6 +384,51 @@ public class TruffulaPrinterTest {
     }
 
 
+    @Test
+    public void testPrintTreeAlphabeticalFileSortingWorks(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        
+        File zebra = new File(root, "zebra.txt");
+        zebra.createNewFile();
+
+        File banana = new File(root, "banana.txt");
+        banana.createNewFile();
+
+        File apple = new File(root, "Apple.txt");
+        apple.createNewFile();
+
+        
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, false, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        int appleIndex = output.indexOf("Apple.txt");
+        int bananaIndex = output.indexOf("banana.txt");
+        int zebraIndex = output.indexOf("zebra.txt");
+
+        assertTrue(appleIndex >= 0);
+        assertTrue(bananaIndex >= 0);
+        assertTrue(zebraIndex >= 0);
+
+        assertTrue(appleIndex < bananaIndex);
+        assertTrue(bananaIndex < zebraIndex);
+
+        
+        
+
+        
+    }
+
+
 
 
 }
