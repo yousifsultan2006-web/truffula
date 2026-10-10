@@ -123,6 +123,8 @@ public class TruffulaPrinter {
     private void helperMethod(File directory, int depth) {
       File[] files = directory.listFiles();
 
+      AlphabeticalFileSorter.sort(files);
+
       for (File file : files) {
         String indentation = "";
 
