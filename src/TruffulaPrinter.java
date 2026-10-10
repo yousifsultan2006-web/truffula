@@ -127,7 +127,10 @@ public class TruffulaPrinter {
           indentation += "   ";
         }
         
-
+        if (!options.isShowHidden() && file.isHidden()) {
+          continue;
+        }
+        
         if (file.isDirectory()) {
           out.println(indentation + file.getName() + "/");
           helperMethod(file, depth + 1);

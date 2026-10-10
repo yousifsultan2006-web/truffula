@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TruffulaPrinterTest {
 
@@ -223,4 +224,87 @@ public class TruffulaPrinterTest {
         // Assert that the output matches the expected output exactly
         assertEquals(expected.toString(), output);
     }
+
+    @Test
+    public void testPrintTreeHiddenFilesDontPrint(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        File visibleFile = new File(root, "visible.txt");
+        visibleFile.createNewFile();
+        File hiddenFile = createHiddenFile(root, ".hidden.txt");
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, false, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("root/"));
+        assertTrue(output.contains("   visible.txt"));
+        assertFalse(output.contains(".hidden.txt"));
+
+        
+    }
+
+     @Test
+    public void testPrintTreeHiddenFilesPrint(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        File visibleFile = new File(root, "visible.txt");
+        visibleFile.createNewFile();
+        File hiddenFile = createHiddenFile(root, ".hidden.txt");
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, true, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("root/"));
+        assertTrue(output.contains("   visible.txt"));
+        assertTrue(output.contains(".hidden.txt"));
+
+        
+    }
+
+    @Test
+    public void testPrintTreeHiddenFoldersDontPrint(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        File hiddenFolder = new File(root, ".hiddenFolder");
+        hiddenFolder.mkdir();
+        File visibleFile = new File(hiddenFolder, "visible.txt");
+        visibleFile.createNewFile();
+        
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, false, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("root/"));
+        assertFalse(output.contains(".hiddenFolder"));
+        assertFalse(output.contains("visible.txt"));
+        
+
+        
+    }
+
+
 }
