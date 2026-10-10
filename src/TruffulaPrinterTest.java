@@ -306,5 +306,84 @@ public class TruffulaPrinterTest {
         
     }
 
+    @Test
+    public void testPrintTreeCyclesColorsByDepth(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        
+        File child = new File(root, "child");
+        child.mkdir();
+
+        File grandchild = new File(child, "grandchild");
+        grandchild.mkdir();
+
+        File file = new File(grandchild, "file.txt");
+        file.createNewFile();
+
+        
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, false, true);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains(ConsoleColor.WHITE.getCode() + "root/"));
+        assertTrue(output.contains(ConsoleColor.PURPLE.getCode() + "   child/"));
+        assertTrue(output.contains(ConsoleColor.YELLOW.getCode() + "      grandchild/"));
+        assertTrue(output.contains(ConsoleColor.WHITE.getCode() + "         file.txt"));
+
+        
+
+        
+    }
+
+     @Test
+    public void testPrintTreeCyclesColorsDoesntPrintIfIsColorFalse(@TempDir File tempDir) throws IOException {
+        File root = new File(tempDir, "root");
+        root.mkdir();
+
+        
+        File child = new File(root, "child");
+        child.mkdir();
+
+        File grandchild = new File(child, "grandchild");
+        grandchild.mkdir();
+
+        File file = new File(grandchild, "file.txt");
+        file.createNewFile();
+
+        
+        
+        
+        TruffulaOptions options = new TruffulaOptions(root, false, false);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        TruffulaPrinter printer = new TruffulaPrinter(options, new PrintStream(outputStream));
+
+        printer.printTree();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains(ConsoleColor.WHITE.getCode()));
+        assertFalse(output.contains(ConsoleColor.PURPLE.getCode()));
+        assertFalse(output.contains(ConsoleColor.YELLOW.getCode()));
+        
+        assertTrue(output.contains("root/"));
+        assertTrue(output.contains("   child/"));
+        assertTrue(output.contains("      grandchild/"));
+        assertTrue(output.contains("         file.txt"));
+        
+
+        
+    }
+
+
+
 
 }
